@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test CRUD App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <Div>
+        <Div id="div1">
+            <form onsubmit="event.preventDefault(); onFormSubmit();" autocomplete="off">
+                <div>
+                    <label>Full Name</label>
+                    <input type="text" name="fullName" id="fullName">
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type="text" name="email" id="email">
+                </div>
+                <div>
+                    <label>Birthdate</label>
+                    <input type="text" name="birthdate" id="birthdate">
+                </div>
+                <div>
+                    <label>Gender</label>
+                    <input type="text" name="gender" id="gender">
+                </div>
+                <div>
+                    <label>Country</label>
+                    <input type="text" name="country" id="country">
+                </div>
+                <div>
+                    <button>
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </Div>
+        <Div id="div2">
+            <table class="list" id="employeeList">
+                <thead>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Birthdate</th>
+                    <th>Gender</th>
+                    <th>Country</th>
+                    <th></th>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </Div>
+    </Div>
+    <script src="script.js"></script>
+</body>
+</html>
