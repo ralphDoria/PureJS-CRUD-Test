@@ -11,12 +11,14 @@ let tableCategories = ["fullName", "email", "birthdate", "gender", "country"];
 
 function onFormSubmit() {
     let formData = readFormData();
-    if (selectedRow == null) {
-        insertNewRecord(formData);
-    } else {
-        updateRecord(formData);
+    if (isValid()) {
+        if (selectedRow == null) {
+            insertNewRecord(formData);
+        } else {
+            updateRecord(formData);
+        }
+        resetForm();
     }
-    resetForm();
 }
 
 function readFormData() {
@@ -36,11 +38,10 @@ function insertNewRecord(formData) {
     }
     let newCell = newRow.insertCell(tableCategories.length);
     newCell.innerHTML = `<a onClick="onEdit(this)">Edit</a>
-                        <a>Delete</a>`;
+                        <a onClick="onDelete(this)">Delete</a>`;
 }
 
 function resetForm() {
-    console.log("Resetting form")
     for (const element of Object.values(elements)) {
         element.value = "";
     }
@@ -63,4 +64,27 @@ function updateRecord(formData) {
             cellToUpdate.innerHTML = newSubmissionValue;
         }
     }
+}
+
+function onDelete(anchorElement) {
+    let rowToDelete = anchorElement.parentElement.parentElement;
+    if (confirm(`Are you sure you want to permanently delete this record?`)) {
+        rowToDelete.remove();
+    }
+}
+
+function isValid() {
+    let isValid = true;
+    // Full name field is required, so check if it's empty
+    let validationErrorElementClassList = document.getElementById("fullNameValidationError").classList
+    if (elements.fullName.value ==  "") {
+        isValid = false;
+        validationErrorElementClassList.remove("hide");
+    } else {
+        if (!validationErrorElementClassList.contains("hide")) {
+            validationErrorElementClassList.add("hide");
+        }
+    }
+
+    return isValid;
 }
