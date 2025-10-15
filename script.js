@@ -11,7 +11,11 @@ let tableCategories = ["fullName", "email", "birthdate", "gender", "country"];
 
 function onFormSubmit() {
     let formData = readFormData();
-    insertNewRecord(formData);
+    if (selectedRow == null) {
+        insertNewRecord(formData);
+    } else {
+        updateRecord(formData);
+    }
     resetForm();
 }
 
@@ -40,12 +44,20 @@ function resetForm() {
     for (const element of Object.values(elements)) {
         element.value = "";
     }
+    selectedRow = null;
 }
 
 function onEdit(anchorElement) {
-    const selectedRow = anchorElement.parentElement.parentElement;
+    selectedRow = anchorElement.parentElement.parentElement;
     // Repopulate form with the selected row's values for each column
     for (let i = 0; i < tableCategories.length; i++) {
         elements[tableCategories[i]].value = selectedRow.cells[i].innerHTML;
+    }
+}
+2
+function updateRecord(formData) {
+    for (let i = 0; i < tableCategories.length; i++) {
+        let cellToUpdate = selectedRow.cells[i];
+        cellToUpdate.innerHTML = formData[tableCategories[i]];
     }
 }
