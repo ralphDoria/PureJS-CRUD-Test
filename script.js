@@ -1,3 +1,5 @@
+let selectedRow = null;
+
 let elements = {
     "fullName": document.getElementById("fullName"),
     "email": document.getElementById("email"),
@@ -15,11 +17,9 @@ function onFormSubmit() {
 
 function readFormData() {
     let formData = {}
-    formData["fullName"] = elements.fullName.value;
-    formData["email"] = elements.email.value;
-    formData["birthdate"] = elements.birthdate.value;
-    formData["gender"] = elements.gender.value;
-    formData["country"] = elements.country.value;
+    for (const [key, value] of Object.entries(elements)) {
+        formData[key] = value.value
+    }
     return formData
 }
 
@@ -42,8 +42,8 @@ function resetForm() {
     }
 }
 
-function onEdit(tableData) {
-    const selectedRow = tableData.parentElement.parentElement;
+function onEdit(anchorElement) {
+    const selectedRow = anchorElement.parentElement.parentElement;
     // Repopulate form with the selected row's values for each column
     for (let i = 0; i < tableCategories.length; i++) {
         elements[tableCategories[i]].value = selectedRow.cells[i].innerHTML;
