@@ -58,6 +58,9 @@ function onEdit(anchorElement) {
 function updateRecord(formData) {
     for (let i = 0; i < tableCategories.length; i++) {
         let cellToUpdate = selectedRow.cells[i];
-        cellToUpdate.innerHTML = formData[tableCategories[i]];
+        let newSubmissionValue = formData[tableCategories[i]];
+        if (cellToUpdate.innerHTML != newSubmissionValue) {
+            cellToUpdate.innerHTML = newSubmissionValue;
+        }
     }
 }
