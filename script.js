@@ -1,3 +1,20 @@
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = 'https://tosmgcjiekdswubxvpml.supabase.co'
+const supabaseKey = process.env.SUPABASE_KEY
+const supabase = createClient(supabaseUrl, supabaseKey)
+
+function loadData() {
+    const allRecordInfoRows = supabase.from('recordInfo').select('*');    
+    for (let row of allRecordInfoRows) {
+        Object.entries(row).forEach(([key, value]) => {
+            console.log(`${key}, ${value}`);
+        })
+    }
+}
+
+loadData();
+
 let selectedRow = null;
 
 let elements = {
